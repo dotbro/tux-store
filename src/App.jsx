@@ -36,7 +36,21 @@ function App() {
         </div>
         <div className='w-1/2 flex flex-col m-3 p-10 gap-3'>
           <h3 className='text-4xl font-bold my-2'>Penguins Merch Exclusive</h3>
-          <p>This is awesome t-shirt thats why you gotta buy it!! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam sequi cupiditate hic minus maxime saepe nihil ipsam illum dolores veritatis. Lorem ipsum dolor sit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste, unde id. Possimus fugit voluptas debitis harum rem dignissimos nulla temporibus velit iusto, aliquam explicabo minima error, quo cumque qui quis, ipsum ab cupiditate non iure magnam laboriosam voluptates! Hic sequi, veritatis eos atque molestias dolore blanditiis optio perspiciatis assumenda ex ullam cum minus enim adipisci dignissimos quae! Nihil, ducimus quia?</p>
+          <p>
+            Introducing the Placeholder T-Shirt – where comfort meets quality. Made from 100% premium combed cotton, this tee is a staple for any wardrobe. With a fabric weight of 180 GSM, it strikes the perfect balance between durability and breathability, making it suitable for all-day wear in any season.
+
+            The Placeholder T-Shirt features double-stitched seams for added durability, ensuring it keeps its shape and softness wash after wash. The relaxed fit and pre-shrunk material guarantee a comfortable fit that lasts. Available in a range of timeless colors, this tee is perfect for layering or wearing on its own. The fabric is OEKO-TEX® certified, meaning it’s free from harmful chemicals, so you can wear it with confidence.
+
+            Whether you’re hitting the gym, running errands, or just relaxing at home, the Placeholder T-Shirt has got you covered. Experience the perfect blend of style, comfort, and quality with this essential wardrobe piece.
+            <br />
+            <br /> - <b>Material:</b> 100% premium combed cotton
+            <br /> - <b>Fabric Weight:</b> 180 GSM for a perfect balance of durability and breathability
+            <br /> - <b>Fit:</b> Relaxed and pre-shrunk for consistent comfort and shape retention
+            <br /> - <b>Durability:</b> Double-stitched seams for enhanced longevity
+            <br /> - <b>Certification:</b> OEKO-TEX® certified, ensuring the fabric is free from harmful chemicals
+            <br /> - <b>Versatility:</b> Available in a range of neutral colors, ideal for layering or wearing solo
+            <br /> - <b>Care:</b> Machine washable, maintaining softness and color wash after wash
+          </p>
 
           <div className='flex items-center space-x-4 my-4'>
             <label className='font-bold text-xl'>Quantity</label>

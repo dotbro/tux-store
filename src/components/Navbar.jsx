@@ -7,9 +7,9 @@ const Navbar = () => {
 
             <div className="hidden md:flex space-x-8">
                 <a href="/" className="text-gray-700 hover:text-gray-900">Home</a>
-                <a href="/about" className="text-gray-700 hover:text-gray-900">About</a>
-                <a href="/contact" className="text-gray-700 hover:text-gray-900">Contact</a>
+                <a href="/Support" className="text-gray-700 hover:text-gray-900">Support</a>
             </div>
+            <a href="/Dashboard" className="bg-blue-600 p-4 rounded-lg text-white">Dashboard</a>
         </nav>
     );
 };
