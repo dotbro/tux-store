@@ -1,3 +1,8 @@
+# PocketBase-related
+pb_data/                   # SQLite database files
+pb_migrations/             # Auto-generated migrations
+*.db                       # Database files
+
 # Logs
 logs
 *.log
