@@ -75,12 +75,12 @@ function Product() {
                                 +
                             </button>
                         </div>
-                        <h2 className='text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 px-4 py-2 rounded-md shadow-lg text-white flex items-center space-x-2'>
+                        <h2 className='text-2xl font-bold bg-blue-600 px-4 py-2 rounded-md shadow-lg text-white flex items-center space-x-2'>
                             <span className='text-gray-200 line-through text-lg'>৳350/pc</span>
                             <span className='text-yellow-300 text-3xl'>৳{price}</span>
                         </h2>
                     </div>
-                    <button className='text-2xl font-bold w-max bg-gradient-to-r from-blue-400 to-blue-600 px-4 py-2 rounded-md shadow-lg text-white flex items-center space-x-2 '>Buy Now!!</button>
+                    <a className='text-2xl font-bold w-max bg-blue-600 px-4 py-2 rounded-md shadow-lg text-white flex items-center space-x-2' href='/order'>Buy Now!!</a>
                 </div>
             </div >
         </>
