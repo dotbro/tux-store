@@ -11,7 +11,29 @@ function Product() {
     const [productImg, setProductImg] = useState([]);
     const [selectedImage, setSelectedImage] = useState(null);
 
+    useEffect(() => {
+        async function fetchProd() {
+            try {
+                const record = await pb.collection('products').getOne('kkk06778qlpzhxv');
+                const images = record.image;
+                const imageUrls = images.map((image) => pb.getFileUrl(record, image));
+                setPrice(record.price);
+                setProductImg(imageUrls);
+                setProduct(record);
+                console.log(record);
+            } catch (error) {
+                console.error('Error fetching product:', error);
+            }
+        }
 
+        fetchProd();
+    }, []);
+
+    useEffect(() => {
+        if (productImg.length > 0) {
+            setSelectedImage(productImg[0]);
+        }
+    }, [productImg]);
     function Increase() {
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
@@ -30,31 +52,7 @@ function Product() {
         const newQuantity = e.target.value;
         setQuantity(newQuantity);
         setPrice(product.price * newQuantity);
-
     }
-    useEffect(() => {
-        async function fetchProd() {
-            try {
-                const record = await pb.collection('products').getOne('kkk06778qlpzhxv');
-                const images = record.image;
-                const imageUrls = images.map((image) => pb.getFileUrl(record, image));
-                setProductImg(imageUrls);
-                setProduct(record);
-                console.log(record);
-            } catch (error) {
-                console.error('Error fetching product:', error);
-            }
-        }
-
-        fetchProd();
-    }, []);
-
-    useEffect(() => {
-        if (productImg.length > 0) {
-            setSelectedImage(productImg[0]);
-        }
-    }, [productImg]);
-
     return (
         <>
             <div className='flex h-screen mt-10'>
@@ -121,8 +119,7 @@ function Product() {
                             </button>
                         </div>
                         <h2 className='text-2xl font-bold bg-blue-600 px-4 py-2 rounded-md shadow-lg text-white flex items-center space-x-2'>
-                            <span className='text-gray-200 line-through text-lg'>৳350/pc</span>
-                            <span className='text-yellow-300 text-3xl'>৳{product ? product.price : "Loading"}</span>
+                            <span className='text-white font-semibold text-3xl'>৳{product ? price : "Loading"}</span>
                         </h2>
                     </div>
                     <a className='text-2xl font-bold w-max bg-blue-600 px-4 py-2 rounded-md shadow-lg text-white flex items-center space-x-2' href='/order'>Buy Now!!</a>
