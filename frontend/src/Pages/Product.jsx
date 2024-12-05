@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect } from 'react'
-import MerchImg from '../assets/merch.jpg'
 import { ProductContext } from '../ProductContext';
 import PocketBase from 'pocketbase';
 
@@ -9,53 +8,84 @@ function Product() {
 
     const { quantity, setQuantity, price, setPrice } = useContext(ProductContext);
     const [product, setProduct] = useState(null);
-    const [productImg, setProductImg] = useState(null);
+    const [productImg, setProductImg] = useState([]);
+    const [selectedImage, setSelectedImage] = useState(null);
+
+
     function Increase() {
         const newQuantity = quantity + 1;
         setQuantity(newQuantity);
-        setPrice(280 * newQuantity);
+        setPrice(product.price * newQuantity);
     }
 
     function Decrease() {
         if (quantity > 1) {
             const newQuantity = quantity - 1;
             setQuantity(newQuantity);
-            setPrice(280 * newQuantity);
+            setPrice(product.price * newQuantity);
         }
     }
     function handleChange(e) {
 
         const newQuantity = e.target.value;
         setQuantity(newQuantity);
-        setPrice(280 * newQuantity);
+        setPrice(product.price * newQuantity);
 
     }
     useEffect(() => {
+        async function fetchProd() {
+            try {
+                const record = await pb.collection('products').getOne('kkk06778qlpzhxv');
+                const images = record.image;
+                const imageUrls = images.map((image) => pb.getFileUrl(record, image));
+                setProductImg(imageUrls);
+                setProduct(record);
+                console.log(record);
+            } catch (error) {
+                console.error('Error fetching product:', error);
+            }
+        }
+
         fetchProd();
     }, []);
 
-
-    async function fetchProd() {
-        try {
-            const record = await pb.collection('products').getOne('kkk06778qlpzhxv');
-            const imageUrl = pb.getFileUrl(record, record.image);
-            setProductImg(imageUrl);
-            setProduct(record);
-            console.log(record);
-        } catch (error) {
-            console.log(error);
+    useEffect(() => {
+        if (productImg.length > 0) {
+            setSelectedImage(productImg[0]);
         }
-    }
-
-
-
+    }, [productImg]);
 
     return (
         <>
-            <div className='flex'>
+            <div className='flex h-screen mt-10'>
                 <div className='w-1/2 flex items-center flex-col p-10 text-center m-5 '>
-                    <img src={productImg} alt="" className='w-1/2' />
-                    <p className='font-thin italic'>{product ? product.name : "Loading product..."}
+                    <div className="flex flex-wrap">
+                        <div className="flex flex-col space-y-4">
+                            {productImg.map((image, index) => (
+                                <img
+                                    key={index}
+                                    src={image}
+                                    alt={`Thumbnail ${index + 1}`}
+                                    className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 ${selectedImage === image ? 'border-blue-500' : 'border-gray-300'
+                                        }`}
+                                    onClick={() => setSelectedImage(image)}
+                                />
+                            ))}
+                        </div>
+
+                        <div className="ml-5">
+                            {selectedImage ? (
+                                <img
+                                    src={selectedImage}
+                                    alt="Selected product"
+                                    className="w-96 h-auto object-cover rounded-md shadow-lg"
+                                />
+                            ) : (
+                                <p>No image selected</p>
+                            )}
+                        </div>
+                    </div>
+                    <p className='mt-4 text-gray-500 italic'>{product ? product.name : "Loading product..."}
                     </p>
                 </div>
                 <div className='w-1/2 flex flex-col m-3 p-10 gap-3'>
@@ -72,7 +102,7 @@ function Product() {
                         <div className='flex items-center border border-gray-400 rounded-md overflow-hidden shadow-md'>
                             <button
                                 onClick={Decrease}
-                                className='px-4 py-2 font-bold bg-purple-600 text-white hover:bg-purple-700 transition-colors duration-200 ease-in-out focus:outline-none active:scale-95'
+                                className='px-4 py-2 font-bold bg-gray-200'
                             >
                                 -
                             </button>
@@ -85,7 +115,7 @@ function Product() {
                             />
                             <button
                                 onClick={Increase}
-                                className='px-4 py-2 font-bold bg-yellow-500 text-gray-800 hover:bg-yellow-600 transition-colors duration-200 ease-in-out focus:outline-none active:scale-95'
+                                className='px-4 py-2 bg-gray-300 font-bold text-gray-800'
                             >
                                 +
                             </button>
